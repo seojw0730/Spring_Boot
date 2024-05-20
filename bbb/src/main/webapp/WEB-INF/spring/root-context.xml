@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 
+	<bean id="testDto3" class="kh.mclass.bbb.sub.model.dto.TestDto" init-method="init">
+		<property name="a1" value="3setter값"/>
+		<constructor-arg name="a2" value="3생성자값"/>
+		<property name="testFileDto" ref="testFileDto"></property>
+	</bean>
+	<bean id="testDto2" class="kh.mclass.bbb.sub.model.dto.TestDto" init-method="init">
+		<property name="a1" value="2setter값"/>
+		<constructor-arg name="a2" value="2생성자값"/>
+		<property name="testFileDto" ref="testFileDto"></property>
+	</bean>
+	<bean id="testDto" class="kh.mclass.bbb.sub.model.dto.TestDto" init-method="init">
+		<property name="a1" value="setter값"/>
+		<constructor-arg name="a2" value="생성자값"/>
+		<property name="testFileDto" ref="testFileDto"></property>
+	</bean>
+	<bean id="testFileDto" class="kh.mclass.bbb.sub.model.dto.TestFileDto">
+		<constructor-arg name="filePath" value="aaa.jpg"/>
+		<constructor-arg name="fileType" value="jpg"/>
+	</bean>
+	-->
+	
+	<context:property-placeholder location="classpath:keyproperties/db.properties"/>
+	
+	<!-- DB 연동 Beans -->
+	<!-- DBCP -->
+	<bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource" destroy-method="close"><!-- 얘는 이 id를 써줘야함 -->
+		<property name="driverClassName" value="${db.driverClassName}"/>
+		<property name="url" value="${db.url}"/>
+		<property name="username" value="${db.username}"/>
+		<property name="password" value="${db.password}"/>
+	</bean>
+	<!-- Mybatis -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+	</bean>
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- 남의 클래스 쓸 때는 이렇게 생성해줄 수밖에 없음 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 방법1 -->
+	<tx:annotation-driven/>
+	 <!-- 방법2
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" rollback-for="Exception"/>
+			<tx:method name="update*" rollback-for="Exception"/>
+			<tx:method name="delete*" rollback-for="Exception"/>
+			<tx:method name="select*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(public * kh..*Service.*(..))" id="serviceMethod"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/>
+	</aop:config>
+	  --> 
+		
+</beans>

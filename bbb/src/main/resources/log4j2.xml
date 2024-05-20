@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<configuration status="DEBUG">
+ 
+    <Appenders>
+        <!-- 콘솔 -->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd hh:mm:ss} %5p [%c] %m%n"/>
+        </Console>
+        
+        <!-- 파일  -->
+        <RollingFile name ="RollingFile">
+            <FileName>C:/log/mylog.txt</FileName>
+            <FilePattern>C:/log/%d{yyyy-MM-dd-hh-mm}/mylog.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+            </Policies>
+        </RollingFile>
+        
+        <RollingFile name ="RollingFileError">
+            <FileName>C:/log/mylog_error.txt</FileName>
+            <FilePattern>C:/log/%d{yyyy-MM-dd-hh-mm}/mylog_error.zip</FilePattern>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+            </Policies>
+        </RollingFile>
+        
+    </Appenders>
+
+    <loggers>
+    	<!-- Application Loggers -->
+		<logger name="kh.mclass.bbb" level="debug">
+			<AppenderRef ref="console"/>
+			<AppenderRef ref="file"/>
+		</logger>
+		
+		<!-- 3rdparty Loggers -->
+		<logger name="org.springframework.jndi" level="info">
+			<AppenderRef ref="console"/>
+		</logger>
+		
+		<logger name="org.springframework.core" level="info">
+			<AppenderRef ref="console"/>
+		</logger>
+		
+		<logger name="org.springframework.beans" level="info">
+			<AppenderRef ref="console"/>
+		</logger>
+		
+		<logger name="org.springframework.context" level="info">
+			<AppenderRef ref="console"/>
+		</logger>
+	
+		<logger name="org.springframework.web" level="info">
+			<AppenderRef ref="console"/>
+		</logger>
+
+        <root level="debug" additivity="true">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="RollingFileError" level = "ERROR"/>
+        </root>
+    </loggers>
+    
+</configuration> 

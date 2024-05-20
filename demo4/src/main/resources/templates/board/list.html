@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>board / list.html</h1>
+	
+	<!-- 태그 사이에 속성으로 집어 넣어서 값 넣기 -->
+	<!-- th 속성이 innerHTML을 먹음 -->
+	<p th:text="${board.boardId}"></p>
+	<p th:text="${board.boardTitle}"></p>
+	<p th:text="${board.boardContent}"></p>
+	
+	<!-- scope 명시 -->
+	<div th:object="${session.demoSession}">
+		<p th:text="*{boardId}"></p>
+		<p th:text="*{boardTitle}"></p>
+		<p th:text="*{boardContent}"></p>
+	</div>
+	
+	<div th:object="${board}">
+		<p th:text="*{boardId}"></p>
+		<p th:text="*{boardTitle}"></p>
+		<p th:text="*{boardContent}"></p>
+	</div>
+</body>
+</html>
