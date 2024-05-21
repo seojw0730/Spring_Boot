@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('Board list')}"/>
 <body>
+	<div class="header" th:insert="~{common/header :: topnav}"></div>
 	<h1>board / list.html</h1>
+	<div th:each="board:${boardlist}">
+		<div th:text="${board.boardId}"></div>
+		<div th:text="${board.boardTitle}"></div>
+		<div th:text="${board.boardContent}"></div>
+	</div>
+	<div th:each="board:${boardlist}">
+		<div th:object="${board}">
+			<div th:text="*{boardId}"></div>
+			<div th:text="*{boardTitle}"></div>
+			<div th:text="*{boardContent}"></div>
+		</div>
+	</div>
 	
-	<!-- 태그 사이에 속성으로 집어 넣어서 값 넣기 -->
-	<!-- th 속성이 innerHTML을 먹음 -->
+<!-- 
 	<p th:text="${board.boardId}"></p>
 	<p th:text="${board.boardTitle}"></p>
 	<p th:text="${board.boardContent}"></p>
 	
-	<!-- scope 명시 -->
 	<div th:object="${session.demoSession}">
 		<p th:text="*{boardId}"></p>
 		<p th:text="*{boardTitle}"></p>
@@ -25,5 +33,6 @@
 		<p th:text="*{boardTitle}"></p>
 		<p th:text="*{boardContent}"></p>
 	</div>
+	 -->
 </body>
 </html>

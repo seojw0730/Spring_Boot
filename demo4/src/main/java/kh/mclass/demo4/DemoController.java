@@ -1,5 +1,8 @@
 package kh.mclass.demo4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +17,17 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class DemoController {
 	@GetMapping("home")
-	public String home() {
-		return "home";
+	public void home() {
 	}
 	@GetMapping("board/list")
 	public void boardlist(Model model, HttpSession session) {
-		BoardEntity dto = new BoardEntity("1", "T1", "C1");
-		model.addAttribute("board", dto);
-		BoardEntity sessionDto = new BoardEntity("000", "T000000", "C00000000");
-		session.setAttribute("demoSession", sessionDto);
+		//DB 연동
+		List<BoardEntity> boardlist = new ArrayList<>();
+		for(int i = 0; i < 10; i++) {
+			BoardEntity dto = new BoardEntity(i+"", "T"+i, "C"+i);
+			boardlist.add(dto);
+		}
+		model.addAttribute("boardlist", boardlist);
 //		return "home";
 	}
 	

@@ -1,20 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('Home')}"/>
 <body>
-	<h1>home.html</h1>
-	<!-- Will produce 'http://localhost:8080/gtvg/order/details?orderId=3' (plus rewriting) -->
-	<a href="read.html" th:href="@{http://localhost:8080/demo4/board(boardId=3)}">view</a>
-	
-	<!-- Will produce '/gtvg/order/details?orderId=3' (plus rewriting) -->
-	<a href="read.html" th:href="@{/board(boardId=4)}">view</a>
-
-	<!-- Will produce '/gtvg/order/3/details' (plus rewriting) -->
-	<a href="read.html" th:href="@{/board/{orderId}(orderId=5)}">view</a>
-	
+	<div class="header" th:insert="~{common/header :: topnav}"></div>
+	<div class="header" th:insert="~{common/header :: topnav}"></div>
+	<section>
+		<div th:replace="~{common/header :: 인사말}"></div>
+	</section>
 	<footer th:insert="~{footer :: copy}"></footer>
+	<h1>home.html</h1>
 </body>
 </html>
