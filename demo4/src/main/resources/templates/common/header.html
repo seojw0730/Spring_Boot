@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{common/header}">
 <head th:fragment="head(v1)">
 	<meta charset="UTF-8">
 	<title th:text="${v1}">header</title>
