@@ -1,4 +1,4 @@
-package kh.mclass.tripant;
+package kh.mclass.demo5;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 
 import lombok.Data;
 
+
 @Component
 @Data
 public class KakaoApi {

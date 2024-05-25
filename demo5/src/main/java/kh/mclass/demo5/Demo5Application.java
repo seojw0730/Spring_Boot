@@ -1,4 +1,4 @@
-package kh.mclass.tripant;
+package kh.mclass.demo5;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
