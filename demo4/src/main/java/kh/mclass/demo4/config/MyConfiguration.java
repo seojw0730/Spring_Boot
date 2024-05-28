@@ -22,11 +22,6 @@ import kh.mclass.demo4.login.controller.KakaoApi;
 //@PropertySources
 public class MyConfiguration implements WebMvcConfigurer {
 	
-//	@Bean
-//	public KakaoReq getKak() {
-//		new ()
-//	}
-	
 //	@Autowired
 //	private LoginInterceptor loginInterceptor;
 	
@@ -60,11 +55,6 @@ public class MyConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/css/**", "/js/**", "/html/**", "/image/**");
-	}
-	
-	@Bean
-	public KakaoApi kakaoApi() {
-		return new KakaoApi();
 	}
 	
 }
