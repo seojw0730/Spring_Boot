@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kh.mclass.demo4.common.LoginInterceptor;
-import kh.mclass.demo4.login.controller.KakaoApi;
 
 //WebMvcConfigurer -> url 관련 설정
 @Configuration
